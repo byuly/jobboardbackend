@@ -3,23 +3,23 @@ package com.jobboard.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Job {
+public class Company {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
-    private String description;
+    private String name;
+    private String industry;
     private String location;
-    private double salary;
 
-    @ManyToOne
-    @JoinColumn(name = "company_id", nullable = false)
-    private Company company;
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    private List<Job> jobs;
 }
